@@ -1,3 +1,24 @@
+
+WRANGLER_LOG=debug wrangler dev   
+Failed to load .env file ".env": Error: ENOENT: no such file or directory, open '.env'
+    at Object.openSync (node:fs:584:3)
+    at Object.readFileSync (node:fs:452:35)
+    at tryLoadDotEnv (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:140305:72)
+    at loadDotEnv (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:140313:12)
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:164454:20
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:151146:16
+    at maybeAsyncResult (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:149426:44)
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:151145:14
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:149414:22
+    at Array.reduce (<anonymous>) {
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '.env'
+}
+ ⛅️ wrangler 2.6.2 
+-------------------
+
 บน:
   ดัน :
     สาขา : [ "หลัก" ]
@@ -57,3 +78,4 @@
         ชื่อแอป : ${{ env.AZURE_WEBAPP_NAME }}
         เผยแพร่โปรไฟล์ : ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         แพ็กเกจ : ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
