@@ -1,99 +1,59 @@
 บน:
-
   ดัน :
-
     สาขา : [ "หลัก" ]
-
   เวิร์กโฟลว์_การจัดส่ง :
 
 สิ่งแวดล้อม:
-
   AZURE_WEBAPP_NAME : kyc-theresawchavez789.us.kg     #ตั้งค่านี้เป็นชื่อแอปพลิเคชันของคุณ
-
   AZURE_WEBAPP_PACKAGE_PATH : ' . '       #ตั้งค่านี้เป็นเส้นทางไปยังโปรเจ็กต์แอปเว็บของคุณ โดยค่าเริ่มต้นคือรูทของที่เก็บข้อมูล
-
   NODE_VERSION : ' 20.x '                 #ตั้งค่านี้เป็นเวอร์ชันโหนดที่จะใช้
 
 การอนุญาต:
-
   เนื้อหา : อ่าน
 
 งาน:
-
   สร้าง :
-
     รันบน : ubuntu-ล่าสุด
-
     ขั้นตอน :
+    - การใช้งาน: actions/checkout@v4
 
-    - แจ้งให้ทราบ : actions/checkout@v4
-
-    - ชื่อ : ตั้งค่า Node.js
-
+    - ชื่อ: ตั้งค่า Node.js
       การใช้งาน : actions/setup-node@v4
-
       กับ :
-
         เวอร์ชันโหนด : ${{ env.NODE_VERSION }}
-
         แคช : ' npm '
 
     - ชื่อ: npm ติดตั้ง สร้าง และทดสอบ
-
       วิ่ง : |
-
         การติดตั้ง npm
-
         npm รัน build --if-present
-
         npm รันทดสอบ --if-present
 
     - ชื่อ: อัปโหลดสิ่งประดิษฐ์สำหรับงานการปรับใช้
-
       การใช้งาน : actions/upload-artifact@v4
-
       กับ :
-
         ชื่อ : node-app
-
         เส้นทาง : kyc-theresawchavez789.us.kg
 
   ปรับใช้ :
-
     การอนุญาต:
-
       เนื้อหา : ไม่มี
-
     รันบน : ubuntu-ล่าสุด
-
     ความต้องการ : สร้าง
-
     สิ่งแวดล้อม :
-
       ชื่อ : 'พัฒนาการ'
-
       URL : ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     ขั้นตอน :
-
     - ชื่อ: ดาวน์โหลดสิ่งประดิษฐ์จากงานสร้าง
-
       การใช้งาน : actions/download-artifact@v4
-
       กับ :
-
         ชื่อ : node-app
 
     - ชื่อ : 'ปรับใช้กับ Azure WebApp '
-
       id : ปรับใช้กับเว็บแอป
-
       การใช้งาน : azure/webapps-deploy@v2
-
       กับ :
-
         ชื่อแอป : ${{ env.AZURE_WEBAPP_NAME }}
-
         เผยแพร่โปรไฟล์ : ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-
         แพ็กเกจ : ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
