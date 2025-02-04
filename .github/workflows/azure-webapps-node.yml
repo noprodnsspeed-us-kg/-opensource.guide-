@@ -1,78 +1,91 @@
-# This workflow will build and push a node.js application to an Azure Web App when a commit is pushed to your default branch.
-#
-# This workflow assumes you have already created the target Azure App Service web app.
-# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=linux&pivots=development-environment-cli
-#
-# To configure this workflow:
-#
-# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
-#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
-#
-# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
-#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
-#
-# 3. Change the value for the AZURE_WEBAPP_NAME. Optionally, change the AZURE_WEBAPP_PACKAGE_PATH and NODE_VERSION environment variables below.
-#
-# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
-# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+WRANGLER_LOG=debug wrangler dev   
+Failed to load .env file ".env": Error: ENOENT: no such file or directory, open '.env'
+    at Object.openSync (node:fs:584:3)
+    at Object.readFileSync (node:fs:452:35)
+    at tryLoadDotEnv (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:140305:72)
+    at loadDotEnv (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:140313:12)
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:164454:20
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:151146:16
+    at maybeAsyncResult (/Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:149426:44)
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:151145:14
+    at /Users/birvine-broque/src/project/node_modules/wrangler/wrangler-dist/cli.js:149414:22
+    at Array.reduce (<anonymous>) {
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '.env'
 
-env:
+
+
+
+สิ่งแวดล้อ
+-7
   AZURE_WEBAPP_NAME: https://github.com/Weera1234/DNS-AGN/edit/main/.github/workflows/azure-webapps-node.yml    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: https://kyc-theresawchavez789.us.kg      # set this to the path to your web app project, defaults to the repository root
+=======
+  AZURE_WEBAPP_NAME: https://github.com/khaledagn/DNS-AGN.git   # set this to your application's name
+
+  AZURE_WEBAPP_PACKAGE_PATH https : //kyc-theresawchavez789.us.kg          # จัดเตรียมเส้นทางนี้ไปยังโปรเจ็กต์แอปเว็บของคุณโดยกักขังคือรูทของความยุติธรรม# 
   NODE_VERSION: '20.x'                # set this to the node version to use
+บน:
+  ดัน :
+    สาขา : [ "หลัก" ]
+  ในตอนแรกโฟลว์_การจัดส่ง: 
 
-permissions:
-  contents: read
+สิ่งแวดล้อม:
+  AZURE_WEBAPP_NAME : kyc-theresawchavez789.us.kg     #ตั้งค่านี้เป็นชื่อแอปพลิเคชันของคุณ
+  AZURE_WEBAPP_PACKAGE_PATH : ' . '       #ตั้งค่านี้เป็นเส้นทางไปยังโปรเจ็กต์แอปเว็บของคุณ โดยค่าเริ่มต้นคือรูทของที่เก็บข้อมูล
+  NODE_VERSION : ' 20.x '                 #ตั้งค่านี้เป็นเวอร์ชันโหนดที่จะใช้
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
+การอนุญาต:
+  เนื้อหา : อ่าน
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+งาน:
+  สร้าง :
+    รันบน : ubuntu-ล่าสุด
+    ขั้นตอน :
+    - การใช้งาน: actionsheckout@v4
 
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+    - ชื่อ: ตั้งค่า Node.js
+      การใช้งาน : actions/setup-node@v4
+      กับ :
+        เวอร์ชันโหนด : ${{ env.NODE_VERSION }}
+        แคช : ' npm '
 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v4
-      with:
-        name: node-app
-        path: .
 
-  deploy:
-    permissions:
-      contents: none
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v4
-      with:
-        name: node-app
+    - ชื่อ: npm ติดตั้ง สร้าง และทดสอบ
+      วิ่ง : |
+        การติดตั้ง npm
+        npm รัน build --if-present
+        npm รันทดสอบ --if-present
 
-    - name: 'Deploy to Azure WebApp'
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - ชื่อ: อัปโหลดสิ่งประดิษฐ์สำหรับงานการปรับใช้
+      การใช้งาน : actions/upload-artifact@v4
+      กับ :
+        ชื่อ : node-app
+        เส้นทาง : kyc-theresawchavez789.us.kg
+
+  ปรับใช้ :
+    การอนุญาต:
+      เนื้อหา : ไม่มี
+    รันบน : ubuntu-ล่าสุด
+    ความต้องการ : สร้าง
+    สิ่งแวดล้อม :
+      ชื่อ : 'พัฒนาการ'
+      URL : ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    ขั้นตอน :
+    - ชื่อ: ดาวน์โหลดสิ่งประดิษฐ์จากงานสร้าง
+      การใช้งาน : actions/download-artifact@v4
+      กับ :
+        ชื่อ : node-app
+
+    - ชื่อ : 'ปรับใช้กับ Azure WebApp '
+      id : ปรับใช้กับเว็บแอป
+      การใช้งาน : azure/webapps-deploy@v2
+      กับ :
+        ชื่อแอป : ${{ env.AZURE_WEBAPP_NAME }}
+        เผยแพร่โปรไฟล์ : ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        แพ็กเกจ : ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
