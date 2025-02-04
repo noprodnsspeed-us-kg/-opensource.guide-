@@ -15,14 +15,19 @@ Failed to load .env file ".env": Error: ENOENT: no such file or directory, open 
   syscall: 'open',
   code: 'ENOENT',
   path: '.env'
-}
- ⛅️ wrangler 2.6.2 
--------------------
 
+
+
+
+env:
+  AZURE_WEBAPP_NAME: https://github.com/khaledagn/DNS-AGN.git   # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: https://kyc-theresawchavez789.us.kg      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '20.x'                # set this to the node version to use
 บน:
   ดัน :
     สาขา : [ "หลัก" ]
   เวิร์กโฟลว์_การจัดส่ง :
+
 
 สิ่งแวดล้อม:
   AZURE_WEBAPP_NAME : kyc-theresawchavez789.us.kg     #ตั้งค่านี้เป็นชื่อแอปพลิเคชันของคุณ
@@ -36,7 +41,7 @@ Failed to load .env file ".env": Error: ENOENT: no such file or directory, open 
   สร้าง :
     รันบน : ubuntu-ล่าสุด
     ขั้นตอน :
-    - การใช้งาน: actions/checkout@v4
+    - การใช้งาน: actionsheckout@v4
 
     - ชื่อ: ตั้งค่า Node.js
       การใช้งาน : actions/setup-node@v4
@@ -44,11 +49,14 @@ Failed to load .env file ".env": Error: ENOENT: no such file or directory, open 
         เวอร์ชันโหนด : ${{ env.NODE_VERSION }}
         แคช : ' npm '
 
+
+
     - ชื่อ: npm ติดตั้ง สร้าง และทดสอบ
       วิ่ง : |
         การติดตั้ง npm
         npm รัน build --if-present
         npm รันทดสอบ --if-present
+
 
     - ชื่อ: อัปโหลดสิ่งประดิษฐ์สำหรับงานการปรับใช้
       การใช้งาน : actions/upload-artifact@v4
