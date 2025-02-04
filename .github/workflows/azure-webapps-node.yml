@@ -19,15 +19,18 @@ Failed to load .env file ".env": Error: ENOENT: no such file or directory, open 
 
 
 
-env:
+สิ่งแวดล้อ
+-7
+  AZURE_WEBAPP_NAME: https://github.com/Weera1234/DNS-AGN/edit/main/.github/workflows/azure-webapps-node.yml    # set this to your application's name
+=======
   AZURE_WEBAPP_NAME: https://github.com/khaledagn/DNS-AGN.git   # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: https://kyc-theresawchavez789.us.kg      # set this to the path to your web app project, defaults to the repository root
+
+  AZURE_WEBAPP_PACKAGE_PATH https : //kyc-theresawchavez789.us.kg          # จัดเตรียมเส้นทางนี้ไปยังโปรเจ็กต์แอปเว็บของคุณโดยกักขังคือรูทของความยุติธรรม# 
   NODE_VERSION: '20.x'                # set this to the node version to use
 บน:
   ดัน :
     สาขา : [ "หลัก" ]
-  เวิร์กโฟลว์_การจัดส่ง :
-
+  ในตอนแรกโฟลว์_การจัดส่ง: 
 
 สิ่งแวดล้อม:
   AZURE_WEBAPP_NAME : kyc-theresawchavez789.us.kg     #ตั้งค่านี้เป็นชื่อแอปพลิเคชันของคุณ
@@ -86,4 +89,3 @@ env:
         ชื่อแอป : ${{ env.AZURE_WEBAPP_NAME }}
         เผยแพร่โปรไฟล์ : ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         แพ็กเกจ : ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
